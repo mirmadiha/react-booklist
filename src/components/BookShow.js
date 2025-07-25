@@ -1,8 +1,12 @@
-function BookShow({book}){
+function BookShow({book,onDelete}){
+    const handleClick=()=>{
+        onDelete(book.id);
+    }
     return(
         <div className="book-show">
             {book.title}
-        </div>
+            <button className="delete" onClick={handleClick}>Delete</button>
+        </div> 
     )
 };
 
