@@ -4,6 +4,17 @@ import {useState} from 'react';
 function App(){
     const[books,setBook]=useState([]);
 
+    const editBookById=(id,newTitle)=>{
+        const newBooks=books.map((book)=>{
+            if(id==book.id){
+                book.title=newTitle;
+                return{...book,title:newTitle};
+            }
+            return book;
+        });
+        setBook(newBooks);
+    }
+
     const deleteBookById=(id)=>{
         const updatedBooks=books.filter((book)=>{
             return book.id!==id;
@@ -20,7 +31,8 @@ function App(){
     console.log(books);
     return (
         <div className="app">
-            <BookList books={books} onDelete={deleteBookById}/>
+            <h1>Reading List</h1>
+            <BookList onEdit={editBookById} books={books} onDelete={deleteBookById}/>
             <BookCreate onCreate={createBook}/>
         </div>
     )
